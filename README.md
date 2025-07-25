@@ -76,11 +76,33 @@ This microservice follows clean architecture principles with clear separation of
 ## 📋 Prerequisites
 
 - Docker and Docker Compose
-- Replicate API token (sign up at [replicate.com](https://replicate.com))
+- **Optional**: Replicate API token (sign up at [replicate.com](https://replicate.com))
+  - **Without token**: System runs in **MOCK MODE** for testing
+  - **With token**: Real AI-powered image generation
 - Python 3.11+ (for local development)
 - Poetry (for dependency management)
 
 ## 🚀 Quick Start
+
+### Option A: Automated Setup (Recommended)
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd media-generation-service
+
+# Run the automated setup script
+./setup.sh
+```
+
+The setup script will:
+- ✅ Check Docker installation
+- ✅ Create configuration files
+- ✅ Ask about Replicate API token (optional)
+- ✅ Start all services
+- ✅ Verify system health
+
+### Option B: Manual Setup
 
 ### 1. Clone and Setup
 
@@ -92,11 +114,12 @@ cd media-generation-service
 # Copy environment configuration
 cp env.example .env
 
-# Edit .env file and add your Replicate API token
-# REPLICATE_API_TOKEN=your_token_here
+# Optional: Add your Replicate API token for real AI generation
+# Leave empty for MOCK MODE (testing without real API calls)
+# REPLICATE_API_TOKEN=r8_your_real_token_here
 ```
 
-### 2. Docker Deployment (Recommended)
+### 2. Docker Deployment
 
 ```bash
 # Start all services
@@ -225,6 +248,47 @@ curl "http://localhost:8000/api/v1/status/{job_id}"
 curl "http://localhost:8000/api/v1/jobs?limit=10&status=completed"
 ```
 
+## 🔧 Development Mode Options
+
+### Option 1: Mock Mode (No Replicate Token)
+
+Run the system **without a Replicate API token** for testing:
+
+```bash
+# In your .env file, leave empty:
+REPLICATE_API_TOKEN=
+
+# The system will:
+# ✅ Accept all generation requests
+# ✅ Simulate processing time
+# ✅ Generate mock image files
+# ✅ Test all endpoints and workflows
+# 🔧 Print "MOCK MODE" messages in logs
+```
+
+**Mock Mode Features:**
+- Generates simple pink placeholder images
+- Simulates 2-second processing time
+- Tests entire workflow without external API costs
+- Perfect for development and CI/CD testing
+
+### Option 2: Real AI Generation (With Replicate Token)
+
+Get a real token for actual AI-powered generation:
+
+1. **Sign up**: Visit [replicate.com](https://replicate.com)
+2. **Get token**: Go to [Account → API Tokens](https://replicate.com/account/api-tokens)
+3. **Add to .env**:
+   ```bash
+   REPLICATE_API_TOKEN=r8_your_actual_token_here
+   ```
+
+**Real Mode Features:**
+- Actual AI-generated images using Stable Diffusion
+- Professional quality results
+- Uses your Replicate credits
+- Full production capabilities
+
 ## 🔧 Configuration
 
 ### Environment Variables
@@ -233,7 +297,7 @@ Key configuration options (see `env.example` for full list):
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `REPLICATE_API_TOKEN` | Replicate API token | Required |
+| `REPLICATE_API_TOKEN` | Replicate API token (optional) | Empty (Mock Mode) |
 | `DATABASE_URL` | PostgreSQL connection URL | `postgresql+asyncpg://...` |
 | `STORAGE_TYPE` | Storage backend (minio/local) | `minio` |
 | `MAX_RETRY_ATTEMPTS` | Max job retry attempts | `3` |

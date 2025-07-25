@@ -76,6 +76,10 @@ services:
       - STORAGE_TYPE=minio
       - DEBUG=false
       - LOG_LEVEL=INFO
+      # Optional: Add your real Replicate token for AI generation
+      # If not provided, system runs in MOCK MODE for testing
+      # Get token from: https://replicate.com/account/api-tokens
+      - REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN:-}
     ports:
       - "8000:8000"
     volumes:
@@ -110,7 +114,9 @@ services:
       - STORAGE_TYPE=minio
       - DEBUG=false
       - LOG_LEVEL=INFO
-      # Add your Replicate API token here
+      # Optional: Add your real Replicate token for AI generation
+      # If not provided, system runs in MOCK MODE for testing
+      # Get token from: https://replicate.com/account/api-tokens
       - REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN:-}
     volumes:
       - ./media_files:/app/media_files
