@@ -4,6 +4,8 @@ A production-ready asynchronous media generation microservice built with FastAPI
 
 ## 🏗️ Architecture Overview
 
+**📊 Interactive Architecture Diagram**: [View on diagrams.net](https://app.diagrams.net/?src=about#G1ZjVaq8pFlsaaNTfVs8LxH_r_Ef-tQtr2#%7B%22pageId%22%3A%22iTnyGUQmCBmeJASWj9-T%22%7D)
+
 This microservice follows clean architecture principles with clear separation of concerns:
 
 ```
