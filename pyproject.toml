@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "media-generation-service"
+version = "0.1.0"
+description = "Asynchronous media generation microservice using Replicate API"
+authors = ["FleekLabs Assessment"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+sqlmodel = "^0.0.14"
+asyncpg = "^0.29.0"
+alembic = "^1.12.1"
+celery = {extras = ["redis"], version = "^5.3.4"}
+redis = "^5.0.1"
+minio = "^7.2.0"
+httpx = "^0.25.2"
+python-multipart = "^0.0.6"
+pydantic-settings = "^2.0.3"
+tenacity = "^8.2.3"
+structlog = "^23.2.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+pytest-mock = "^3.12.0"
+black = "^23.11.0"
+isort = "^5.12.0"
+mypy = "^1.7.1"
+ruff = "^0.1.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+plugins = ["pydantic.mypy"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311" 
